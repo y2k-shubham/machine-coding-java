@@ -15,6 +15,11 @@ public class Cache implements ICache {
 
     @Override
     public boolean put(String key, String value) {
+        if (this.storage.isFull()) {
+            String keyToEvict = this.evictionPolicy.getKeyToEvict();
+            this.evictionPolicy.evict(keyToEvict);
+        }
+
         this.evictionPolicy.setAccessed(key);
         return this.storage.put(key, value);
     }
