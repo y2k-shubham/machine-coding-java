@@ -3,14 +3,13 @@ package Cache;
 import EvictionPolicy.IEvictionPolicy;
 import Storage.IStorage;
 
-public abstract class AbstractCache implements ICache {
+public class Cache implements ICache {
 
-    private int capacity;
     protected IStorage storage;
     private IEvictionPolicy evictionPolicy;
 
-    public AbstractCache(int capacity, IEvictionPolicy evictionPolicy) {
-        this.capacity = capacity;
+    public Cache(IStorage storage, IEvictionPolicy evictionPolicy) {
+        this.storage = storage;
         this.evictionPolicy = evictionPolicy;
     }
 
