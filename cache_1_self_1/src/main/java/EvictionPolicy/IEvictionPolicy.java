@@ -6,4 +6,6 @@ public interface IEvictionPolicy {
 
     public String getKeyToEvict();
 
+    public boolean evict(String key);
+
 }

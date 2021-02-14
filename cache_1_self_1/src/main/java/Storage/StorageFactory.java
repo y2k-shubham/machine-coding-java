@@ -6,7 +6,7 @@ public class StorageFactory {
         IStorage storage;
 
         switch (storageType) {
-            case "HashMapStorage":
+            case "HashMap":
                 storage = new HashMapStorage(capacity);
                 break;
 

@@ -31,9 +31,18 @@ public class LRUEvictionPolicy implements IEvictionPolicy {
         Set <String> candidateKeys = this.lastAccessedTsKeysMap.firstEntry().getValue();
         String victimKey = candidateKeys.iterator().next();
 
-        candidateKeys.remove(victimKey);
-        this.keyLastAccessedTsMap.remove(victimKey);
-
         return victimKey;
+    }
+
+    @Override
+    public boolean evict(String key) {
+        Long lastAccessedTs = this.keyLastAccessedTsMap.remove(key);
+
+        if (lastAccessedTs == null) {
+            return false;
+        } else {
+            this.keyLastAccessedTsMap.remove(key);
+            return this.lastAccessedTsKeysMap.get(lastAccessedTs).remove(key);
+        }
     }
 }
