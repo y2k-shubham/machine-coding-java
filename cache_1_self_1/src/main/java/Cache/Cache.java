@@ -18,6 +18,7 @@ public class Cache implements ICache {
         if (this.storage.isFull()) {
             String keyToEvict = this.evictionPolicy.getKeyToEvict();
             this.evictionPolicy.evict(keyToEvict);
+            this.storage.clear(keyToEvict);
         }
 
         this.evictionPolicy.setAccessed(key);
